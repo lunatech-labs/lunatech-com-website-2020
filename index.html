@@ -140,9 +140,7 @@
               heading.classList.add('heading-3')
               const a = document.createElement('a')
               a.href = post.link
-            
-              const title = document.createTextNode(post.title.rendered)
-              a.appendChild(title)
+              a.innerHTML = post.title.rendered
 
               heading.appendChild(a)
 
