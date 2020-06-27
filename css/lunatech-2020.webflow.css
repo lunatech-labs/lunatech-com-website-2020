@@ -57,6 +57,7 @@
 
 .secondary-content {
   min-width: 10vw;
+  width: 100%;
 }
 
 .col-wrapper {
