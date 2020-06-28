@@ -30,7 +30,7 @@
         <div class="chapo-wrapper-primary" >
           <div class="slider-chapo"><a href="https://blog.lunatech.com">Lunatech Tech Blog</a></div>
         </div>
-        <div class="mask w-slider-mask" id="state">
+        <div class="mask w-slider-mask" style="display: none" id="state">
           <!-- <div class="w-slide" >
             <div class="slide-date">Mar 23, 2020</div>
             <h3 class="heading-3">When Hibernate caching can go wrong</h3>
@@ -106,11 +106,22 @@
         return true
       }
 
+     async function ready() {
+        return Webflow.ready()
+      }
+
+      async function destroy() {
+        return Webflow.destroy()
+      }
+      
       Webflow.push(function () {
-        Webflow.destroy()
+        
         // Get the last 10 posts
         
-        state.posts = fetchPosts(1)
+        state.posts = destroy()
+          .then(() => 
+            fetchPosts(1)
+          )
           .then((data) => {
             //console.log('state ', state.posts)
             // Update the DOM tree with the same structure
@@ -120,7 +131,6 @@
             //  </div>
             
             const x = document.getElementById("state")
-            
             for (const post of state.posts) {
               const wSlide = document.createElement("div")
               wSlide.classList.add('w-slide')
@@ -145,11 +155,8 @@
               
               x.appendChild(wSlide)
             }   
-         
-            
-          }).then(() => {
-            Webflow.ready()
-          })
+            x.style.display="block"
+          }).then(ready)
           
         })
   </script>
