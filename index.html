@@ -78,39 +78,38 @@
   crossorigin="anonymous"></script>
 
   <script>
-   
-        let state = {
-          posts: [],
-          baseUrl: 'https://blog.lunatech.com/wp-json/wp/v2/posts',
-          perPage: '?per_page=10',
-          wpFetchHeaders: {
-            headers: {
-            }
-          }
+  
+      let state = {
+        posts: [],
+        baseUrl: 'https://blog.lunatech.com/wp-json/wp/v2/posts',
+        perPage: '?per_page=10'
+      }
+
+      async function getNumPosts() {
+        const { headers } = await axios(`${state.baseUrl}${state.perPage}`, state.wpFetchHeaders)
+        return headers['x-wp-totalpages']
+      }
+
+      async function fetchPosts(numPages) {
+        const posts = []
+
+        for (let page = 1; page <= numPages; page += 1) {
+          const post = axios.get(`${state.baseUrl}${state.perPage}&page=${page}`, state.wpFetchHeaders)
+          posts.push(post)
         }
 
-        async function getNumPosts() {
-          const { headers } = await axios(`${state.baseUrl}${state.perPage}`, state.wpFetchHeaders)
-          return headers['x-wp-totalpages']
-        }
+        await axios.all(posts).then((response) => {
+          const postData = response.map(res => res.data)
+          state.posts = postData.flat()
+        }).catch(e => console.log('error fetching posts: ', e))
 
-        async function fetchPosts(numPages) {
-          const posts = []
+        return true
+      }
 
-          for (let page = 1; page <= numPages; page += 1) {
-            const post = axios.get(`${state.baseUrl}${state.perPage}&page=${page}`, state.wpFetchHeaders)
-            posts.push(post)
-          }
-
-          await axios.all(posts).then((response) => {
-            const postData = response.map(res => res.data)
-            state.posts = postData.flat()
-          }).catch(e => console.log('error fetching posts: ', e))
-
-          return true
-        }
-
-        // Get the last 5 posts
+      Webflow.push(function () {
+        Webflow.destroy()
+        // Get the last 10 posts
+        
         state.posts = fetchPosts(1)
           .then((data) => {
             //console.log('state ', state.posts)
@@ -119,8 +118,9 @@
             //  <div class="slide-date">Mar 23, 2020</div>
             //    <h3 class="heading-3">When Hibernate caching can go wrong</h3>
             //  </div>
-
+            
             const x = document.getElementById("state")
+            
             for (const post of state.posts) {
               const wSlide = document.createElement("div")
               wSlide.classList.add('w-slide')
@@ -144,13 +144,14 @@
               wSlide.appendChild(heading)
               
               x.appendChild(wSlide)
-            }
-          
-            Webflow.destroy()
+            }   
+         
+            
+          }).then(() => {
             Webflow.ready()
-            document.dispatchEvent(new Event('readystatechange'))
           })
-        
+          
+        })
   </script>
 
 
