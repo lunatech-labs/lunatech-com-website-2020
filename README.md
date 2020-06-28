@@ -2,4 +2,4 @@
 
 This is the .com portal website.
 
-Please report any issue to [Jira](https://lunatech.atlassian.net/jira/software/projects/LGW/boards/10) 
+Please report any issues to [Jira](https://lunatech.atlassian.net/jira/software/projects/LGW/boards/10) 
