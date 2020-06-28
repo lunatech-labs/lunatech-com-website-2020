@@ -930,7 +930,7 @@ textarea.w-select {
   tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .w-slider-mask {
-
+  width: 100%;
   display: block;
   overflow: hidden;
   z-index: 1;
@@ -940,6 +940,7 @@ textarea.w-select {
   white-space: nowrap;
 }
 .w-slide {
+  width: 100%;
   position: relative;
   display: inline-block;
   vertical-align: top;
