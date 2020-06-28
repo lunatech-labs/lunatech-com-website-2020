@@ -936,7 +936,7 @@ textarea.w-select {
   z-index: 1;
   left: 0;
   right: 0;
-
+  margin: 5%;
   white-space: nowrap;
 }
 .w-slide {
