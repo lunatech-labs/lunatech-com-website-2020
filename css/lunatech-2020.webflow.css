@@ -111,7 +111,7 @@
 .link {
   color: #fff;
   font-weight: 700;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .heading-3, .heading-3 a {
