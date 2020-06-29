@@ -1,2 +1,2 @@
 # Redirect traffic from www.lunatech.com/blog to blog.lunatech.com
-RewriteRule "^blog/(.+)" "https://blog.lunatech.coms/$1"
+RewriteRule "^/(.+)" "https://blog.lunatech.coms/$1"
