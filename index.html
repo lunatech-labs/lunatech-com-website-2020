@@ -146,7 +146,7 @@
               heading.classList.add('heading-3')
               const a = document.createElement('a')
               a.href = "https://blog.lunatech.com" + post.slug
-              a.innerHTML = post.title
+              a.innerHTML = post.title + "<br><span>by " + post.author + "</span>"
 
               heading.appendChild(a)
 
