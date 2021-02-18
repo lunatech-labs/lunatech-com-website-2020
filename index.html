@@ -139,14 +139,14 @@
               slideDate.classList.add('slide-date')
               var options = {year: 'numeric', month: 'short', day: 'numeric' };
 
-              const date = document.createTextNode(new Date(post.date).toLocaleDateString("en-US", options))
+              const date = document.createTextNode(new Date(post.publication_date).toLocaleDateString("en-US", options))
               slideDate.appendChild(date)
 
               const heading = document.createElement("h3")
               heading.classList.add('heading-3')
               const a = document.createElement('a')
-              a.href = post.link
-              a.innerHTML = post.title.rendered
+              a.href = "https://blog.lunatech.com" + post.slug
+              a.innerHTML = post.title
 
               heading.appendChild(a)
 
